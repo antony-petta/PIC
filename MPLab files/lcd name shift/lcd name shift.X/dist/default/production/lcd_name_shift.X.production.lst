@@ -1,0 +1,772 @@
+
+
+Microchip MPLAB XC8 Assembler V2.46 build 20240104201356 
+                                                                                               Thu Aug 08 13:50:01 2024
+
+Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1 
+     1                           	processor	18F4580
+     2                           	fnconf	rparam,??,?,0
+     3                           	pagewidth 120
+     4                           	opt	flic
+     5                           	psect	smallconst,global,reloc=2,class=SMALLCONST,delta=1,noexec
+     6                           	psect	cinit,global,reloc=2,class=CODE,delta=1
+     7                           	psect	cstackCOMRAM,global,class=COMRAM,space=1,delta=1,lowdata,noexec
+     8                           	psect	text0,global,reloc=2,class=CODE,delta=1
+     9                           	psect	text1,global,reloc=2,class=CODE,delta=1
+    10                           	psect	text2,global,reloc=2,class=CODE,delta=1
+    11                           	psect	text3,global,reloc=2,class=CODE,delta=1
+    12                           	psect	text4,global,reloc=2,class=CODE,delta=1
+    13                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1,noexec
+    14                           	psect	rparam,global,class=COMRAM,space=1,delta=1,noexec
+    15   000000                     
+    16                           ; Generated 17/10/2023 GMT
+    17                           ; 
+    18                           ; Copyright © 2023, Microchip Technology Inc. and its subsidiaries ("Microchip")
+    19                           ; All rights reserved.
+    20                           ; 
+    21                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+      +                          ip").
+    22                           ; 
+    23                           ; Redistribution and use in source and binary forms, with or without modification, are
+    24                           ; permitted provided that the following conditions are met:
+    25                           ; 
+    26                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+      +                          t of
+    27                           ;        conditions and the following disclaimer.
+    28                           ; 
+    29                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+      +                          list
+    30                           ;        of conditions and the following disclaimer in the documentation and/or other
+    31                           ;        materials provided with the distribution. Publication is not required when
+    32                           ;        this file is used in an embedded application.
+    33                           ; 
+    34                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+      +                          is
+    35                           ;        software without specific prior written permission.
+    36                           ; 
+    37                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    38                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+      +                          OR
+    39                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+      +                          T,
+    40                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+    41                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+    42                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+      +                          RICT
+    43                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+      +                          SE OF
+    44                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    45                           ; 
+    46                           ; 
+    47                           ; Code-generator required, PIC18F4580 Definitions
+    48                           ; 
+    49                           ; SFR Addresses
+    50   000000                     _RC2	set	31762
+    51   000000                     _RC1	set	31761
+    52   000000                     _TRISC	set	3988
+    53   000000                     _RC0	set	31760
+    54   000000                     _TRISD	set	3989
+    55   000000                     _PORTD	set	3971
+    56                           
+    57                           	psect	smallconst
+    58   000600                     __psmallconst:
+    59                           	callstack 0
+    60   000600  00                 	db	0
+    61   000601                     STR_1:
+    62   000601  48                 	db	72	;'H'
+    63   000602  65                 	db	101	;'e'
+    64   000603  6C                 	db	108	;'l'
+    65   000604  6C                 	db	108	;'l'
+    66   000605  30                 	db	48	;'0'
+    67   000606  00                 	db	0
+    68   000607  00                 	db	0	; dummy byte at the end
+    69   000000                     
+    70                           ; #config settings
+    71                           
+    72                           	psect	cinit
+    73   000752                     __pcinit:
+    74                           	callstack 0
+    75   000752                     start_initialization:
+    76                           	callstack 0
+    77   000752                     __initialization:
+    78                           	callstack 0
+    79   000752                     end_of_initialization:
+    80                           	callstack 0
+    81   000752                     __end_of__initialization:
+    82                           	callstack 0
+    83   000752  0E00               	movlw	low (__Lsmallconst shr (0+16))
+    84   000754  6EF8               	movwf	tblptru,c
+    85   000756  0E06               	movlw	high __Lsmallconst
+    86   000758  6EF7               	movwf	tblptrh,c
+    87   00075A  0100               	movlb	0
+    88   00075C  EF04  F003         	goto	_main	;jump to C main() function
+    89                           
+    90                           	psect	cstackCOMRAM
+    91   000001                     __pcstackCOMRAM:
+    92                           	callstack 0
+    93   000001                     delay@time:
+    94                           	callstack 0
+    95                           
+    96                           ; 4 bytes @ 0x0
+    97   000001                     	ds	4
+    98   000005                     ??_delay:
+    99                           
+   100                           ; 1 bytes @ 0x4
+   101   000005                     	ds	1
+   102   000006                     delay@i:
+   103                           	callstack 0
+   104                           
+   105                           ; 4 bytes @ 0x5
+   106   000006                     	ds	4
+   107   00000A                     lcdctrl@a:
+   108                           	callstack 0
+   109   00000A                     lcddisp@b:
+   110                           	callstack 0
+   111                           
+   112                           ; 1 bytes @ 0x9
+   113   00000A                     	ds	1
+   114   00000B                     lcdstring@p:
+   115                           	callstack 0
+   116                           
+   117                           ; 1 bytes @ 0xA
+   118   00000B                     	ds	1
+   119   00000C                     main@j:
+   120                           	callstack 0
+   121                           
+   122                           ; 2 bytes @ 0xB
+   123   00000C                     	ds	2
+   124   00000E                     main@j_48:
+   125                           	callstack 0
+   126                           
+   127                           ; 2 bytes @ 0xD
+   128   00000E                     	ds	2
+   129                           
+   130 ;;
+   131 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   132 ;;
+   133 ;; *************** function _main *****************
+   134 ;; Defined at:
+   135 ;;		line 7 in file "nameshift.c"
+   136 ;; Parameters:    Size  Location     Type
+   137 ;;		None
+   138 ;; Auto vars:     Size  Location     Type
+   139 ;;  j               2   13[COMRAM] int 
+   140 ;;  j               2   11[COMRAM] int 
+   141 ;;  c1              2    0        int 
+   142 ;; Return value:  Size  Location     Type
+   143 ;;                  1    wreg      void 
+   144 ;; Registers used:
+   145 ;;		wreg, status,2, status,0, tblptrl, tblptrh, tblptru, cstack
+   146 ;; Tracked objects:
+   147 ;;		On entry : 0/0
+   148 ;;		On exit  : 0/0
+   149 ;;		Unchanged: 0/0
+   150 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   151 ;;      Params:         0       0       0       0       0       0       0
+   152 ;;      Locals:         4       0       0       0       0       0       0
+   153 ;;      Temps:          0       0       0       0       0       0       0
+   154 ;;      Totals:         4       0       0       0       0       0       0
+   155 ;;Total ram usage:        4 bytes
+   156 ;; Hardware stack levels required when called: 3
+   157 ;; This function calls:
+   158 ;;		_lcdctrl
+   159 ;;		_lcdstring
+   160 ;; This function is called by:
+   161 ;;		Startup code after reset
+   162 ;; This function uses a non-reentrant model
+   163 ;;
+   164                           
+   165                           	psect	text0
+   166   000608                     __ptext0:
+   167                           	callstack 0
+   168   000608                     _main:
+   169                           	callstack 28
+   170   000608                     
+   171                           ;nameshift.c: 8:     TRISC=0x08;
+   172   000608  0E08               	movlw	8
+   173   00060A  6E94               	movwf	148,c	;volatile
+   174                           
+   175                           ;nameshift.c: 9:     TRISD=0x00;
+   176   00060C  0E00               	movlw	0
+   177   00060E  6E95               	movwf	149,c	;volatile
+   178   000610                     
+   179                           ;nameshift.c: 11:     int j=0;
+   180   000610  0E00               	movlw	0
+   181   000612  6E0D               	movwf	(main@j+1)^0,c
+   182   000614  0E00               	movlw	0
+   183   000616  6E0C               	movwf	main@j^0,c
+   184   000618                     
+   185                           ;nameshift.c: 12:     lcdctrl(0x01);
+   186   000618  0E01               	movlw	1
+   187   00061A  EC77  F003         	call	_lcdctrl
+   188   00061E                     
+   189                           ;nameshift.c: 13:     lcdctrl(0x0f);
+   190   00061E  0E0F               	movlw	15
+   191   000620  EC77  F003         	call	_lcdctrl
+   192   000624                     
+   193                           ;nameshift.c: 14:     lcdctrl(0xa7);
+   194   000624  0EA7               	movlw	167
+   195   000626  EC77  F003         	call	_lcdctrl
+   196   00062A                     
+   197                           ;nameshift.c: 15:     lcdstring("Hell0");
+   198   00062A  0E01               	movlw	low STR_1
+   199   00062C  6E0B               	movwf	lcdstring@p^0,c
+   200   00062E  EC93  F003         	call	_lcdstring	;wreg free
+   201   000632                     l830:
+   202                           
+   203                           ;nameshift.c: 19:     for(int j=0;j<16;j++){
+   204   000632  0E00               	movlw	0
+   205   000634  6E0F               	movwf	(main@j_48+1)^0,c
+   206   000636  0E00               	movlw	0
+   207   000638  6E0E               	movwf	main@j_48^0,c
+   208   00063A                     l836:
+   209                           
+   210                           ;nameshift.c: 20:         lcdctrl(0x1c);
+   211   00063A  0E1C               	movlw	28
+   212   00063C  EC77  F003         	call	_lcdctrl
+   213   000640                     
+   214                           ;nameshift.c: 21:         }
+   215   000640  4A0E               	infsnz	main@j_48^0,f,c
+   216   000642  2A0F               	incf	(main@j_48+1)^0,f,c
+   217   000644  BE0F               	btfsc	(main@j_48+1)^0,7,c
+   218   000646  EF2E  F003         	goto	u61
+   219   00064A  500F               	movf	(main@j_48+1)^0,w,c
+   220   00064C  E109               	bnz	u60
+   221   00064E  0E10               	movlw	16
+   222   000650  5C0E               	subwf	main@j_48^0,w,c
+   223   000652  A0D8               	btfss	status,0,c
+   224   000654  EF2E  F003         	goto	u61
+   225   000658  EF30  F003         	goto	u60
+   226   00065C                     u61:
+   227   00065C  EF1D  F003         	goto	l836
+   228   000660                     u60:
+   229   000660                     
+   230                           ;nameshift.c: 22:     lcdctrl(0x02);
+   231   000660  0E02               	movlw	2
+   232   000662  EC77  F003         	call	_lcdctrl
+   233   000666  EF19  F003         	goto	l830
+   234   00066A  EF00  F000         	goto	start
+   235   00066E                     __end_of_main:
+   236                           	callstack 0
+   237                           
+   238 ;; *************** function _lcdstring *****************
+   239 ;; Defined at:
+   240 ;;		line 46 in file "nameshift.c"
+   241 ;; Parameters:    Size  Location     Type
+   242 ;;  p               1   10[COMRAM] PTR const unsigned char 
+   243 ;;		 -> STR_1(6), 
+   244 ;; Auto vars:     Size  Location     Type
+   245 ;;		None
+   246 ;; Return value:  Size  Location     Type
+   247 ;;                  1    wreg      void 
+   248 ;; Registers used:
+   249 ;;		wreg, status,2, status,0, tblptrl, tblptrh, tblptru, cstack
+   250 ;; Tracked objects:
+   251 ;;		On entry : 0/0
+   252 ;;		On exit  : 0/0
+   253 ;;		Unchanged: 0/0
+   254 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   255 ;;      Params:         1       0       0       0       0       0       0
+   256 ;;      Locals:         0       0       0       0       0       0       0
+   257 ;;      Temps:          0       0       0       0       0       0       0
+   258 ;;      Totals:         1       0       0       0       0       0       0
+   259 ;;Total ram usage:        1 bytes
+   260 ;; Hardware stack levels used: 1
+   261 ;; Hardware stack levels required when called: 2
+   262 ;; This function calls:
+   263 ;;		_lcddisp
+   264 ;; This function is called by:
+   265 ;;		_main
+   266 ;; This function uses a non-reentrant model
+   267 ;;
+   268                           
+   269                           	psect	text1
+   270   000726                     __ptext1:
+   271                           	callstack 0
+   272   000726                     _lcdstring:
+   273                           	callstack 28
+   274   000726                     
+   275                           ;nameshift.c: 47:     while(*p)
+   276   000726  EF9C  F003         	goto	l816
+   277   00072A                     l812:
+   278                           
+   279                           ;nameshift.c: 48:     {;nameshift.c: 49:         lcddisp(*p);
+   280   00072A  C00B  FFF6         	movff	lcdstring@p,tblptrl
+   281   00072E                     	if	0	;There is only one active tblptr byte
+   282   00072E                     	endif
+   283   00072E                     	if	0	;tblptru may be non-zero
+   284   00072E                     	endif
+   285   00072E                     	if	0	;tblptru may be non-zero
+   286   00072E                     	endif
+   287   00072E  0008               	tblrd		*
+   288   000730  50F5               	movf	tablat,w,c
+   289   000732  EC5B  F003         	call	_lcddisp
+   290   000736                     
+   291                           ;nameshift.c: 50:         p++;
+   292   000736  2A0B               	incf	lcdstring@p^0,f,c
+   293   000738                     l816:
+   294                           
+   295                           ;nameshift.c: 47:     while(*p)
+   296   000738  C00B  FFF6         	movff	lcdstring@p,tblptrl
+   297   00073C                     	if	0	;There is only one active tblptr byte
+   298   00073C                     	endif
+   299   00073C                     	if	0	;tblptru may be non-zero
+   300   00073C                     	endif
+   301   00073C                     	if	0	;tblptru may be non-zero
+   302   00073C                     	endif
+   303   00073C  0008               	tblrd		*
+   304   00073E  50F5               	movf	tablat,w,c
+   305   000740  0900               	iorlw	0
+   306   000742  A4D8               	btfss	status,2,c
+   307   000744  EFA6  F003         	goto	u51
+   308   000748  EFA8  F003         	goto	u50
+   309   00074C                     u51:
+   310   00074C  EF95  F003         	goto	l812
+   311   000750                     u50:
+   312   000750  0012               	return		;funcret
+   313   000752                     __end_of_lcdstring:
+   314                           	callstack 0
+   315                           
+   316 ;; *************** function _lcddisp *****************
+   317 ;; Defined at:
+   318 ;;		line 37 in file "nameshift.c"
+   319 ;; Parameters:    Size  Location     Type
+   320 ;;  b               1    wreg     unsigned char 
+   321 ;; Auto vars:     Size  Location     Type
+   322 ;;  b               1    9[COMRAM] unsigned char 
+   323 ;; Return value:  Size  Location     Type
+   324 ;;                  1    wreg      void 
+   325 ;; Registers used:
+   326 ;;		wreg, status,2, status,0, cstack
+   327 ;; Tracked objects:
+   328 ;;		On entry : 0/0
+   329 ;;		On exit  : 0/0
+   330 ;;		Unchanged: 0/0
+   331 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   332 ;;      Params:         0       0       0       0       0       0       0
+   333 ;;      Locals:         1       0       0       0       0       0       0
+   334 ;;      Temps:          0       0       0       0       0       0       0
+   335 ;;      Totals:         1       0       0       0       0       0       0
+   336 ;;Total ram usage:        1 bytes
+   337 ;; Hardware stack levels used: 1
+   338 ;; Hardware stack levels required when called: 1
+   339 ;; This function calls:
+   340 ;;		_delay
+   341 ;; This function is called by:
+   342 ;;		_lcdstring
+   343 ;; This function uses a non-reentrant model
+   344 ;;
+   345                           
+   346                           	psect	text2
+   347   0006B6                     __ptext2:
+   348                           	callstack 0
+   349   0006B6                     _lcddisp:
+   350                           	callstack 28
+   351                           
+   352                           ;incstack = 0
+   353                           ;lcddisp@b stored from wreg
+   354   0006B6  6E0A               	movwf	lcddisp@b^0,c
+   355   0006B8                     
+   356                           ;nameshift.c: 38:     RC0=1;
+   357   0006B8  8082               	bsf	3970,0,c	;volatile
+   358                           
+   359                           ;nameshift.c: 39:     RC1=0;
+   360   0006BA  9282               	bcf	3970,1,c	;volatile
+   361   0006BC                     
+   362                           ;nameshift.c: 40:     PORTD=b;
+   363   0006BC  C00A  FF83         	movff	lcddisp@b,3971	;volatile
+   364   0006C0                     
+   365                           ;nameshift.c: 41:     RC2=1;
+   366   0006C0  8482               	bsf	3970,2,c	;volatile
+   367   0006C2                     
+   368                           ;nameshift.c: 42:     delay(100);
+   369   0006C2  0E64               	movlw	100
+   370   0006C4  6E01               	movwf	delay@time^0,c
+   371   0006C6  0E00               	movlw	0
+   372   0006C8  6E02               	movwf	(delay@time+1)^0,c
+   373   0006CA  0E00               	movlw	0
+   374   0006CC  6E03               	movwf	(delay@time+2)^0,c
+   375   0006CE  0E00               	movlw	0
+   376   0006D0  6E04               	movwf	(delay@time+3)^0,c
+   377   0006D2  EC37  F003         	call	_delay	;wreg free
+   378   0006D6                     
+   379                           ;nameshift.c: 43:     RC2=0;
+   380   0006D6  9482               	bcf	3970,2,c	;volatile
+   381   0006D8                     
+   382                           ;nameshift.c: 44:     delay(5000);
+   383   0006D8  0E88               	movlw	136
+   384   0006DA  6E01               	movwf	delay@time^0,c
+   385   0006DC  0E13               	movlw	19
+   386   0006DE  6E02               	movwf	(delay@time+1)^0,c
+   387   0006E0  0E00               	movlw	0
+   388   0006E2  6E03               	movwf	(delay@time+2)^0,c
+   389   0006E4  0E00               	movlw	0
+   390   0006E6  6E04               	movwf	(delay@time+3)^0,c
+   391   0006E8  EC37  F003         	call	_delay	;wreg free
+   392   0006EC  0012               	return		;funcret
+   393   0006EE                     __end_of_lcddisp:
+   394                           	callstack 0
+   395                           
+   396 ;; *************** function _lcdctrl *****************
+   397 ;; Defined at:
+   398 ;;		line 28 in file "nameshift.c"
+   399 ;; Parameters:    Size  Location     Type
+   400 ;;  a               1    wreg     unsigned char 
+   401 ;; Auto vars:     Size  Location     Type
+   402 ;;  a               1    9[COMRAM] unsigned char 
+   403 ;; Return value:  Size  Location     Type
+   404 ;;                  1    wreg      void 
+   405 ;; Registers used:
+   406 ;;		wreg, status,2, status,0, cstack
+   407 ;; Tracked objects:
+   408 ;;		On entry : 0/0
+   409 ;;		On exit  : 0/0
+   410 ;;		Unchanged: 0/0
+   411 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   412 ;;      Params:         0       0       0       0       0       0       0
+   413 ;;      Locals:         1       0       0       0       0       0       0
+   414 ;;      Temps:          0       0       0       0       0       0       0
+   415 ;;      Totals:         1       0       0       0       0       0       0
+   416 ;;Total ram usage:        1 bytes
+   417 ;; Hardware stack levels used: 1
+   418 ;; Hardware stack levels required when called: 1
+   419 ;; This function calls:
+   420 ;;		_delay
+   421 ;; This function is called by:
+   422 ;;		_main
+   423 ;; This function uses a non-reentrant model
+   424 ;;
+   425                           
+   426                           	psect	text3
+   427   0006EE                     __ptext3:
+   428                           	callstack 0
+   429   0006EE                     _lcdctrl:
+   430                           	callstack 29
+   431                           
+   432                           ;incstack = 0
+   433                           ;lcdctrl@a stored from wreg
+   434   0006EE  6E0A               	movwf	lcdctrl@a^0,c
+   435   0006F0                     
+   436                           ;nameshift.c: 29:     RC0=0;
+   437   0006F0  9082               	bcf	3970,0,c	;volatile
+   438                           
+   439                           ;nameshift.c: 30:     RC1=0;
+   440   0006F2  9282               	bcf	3970,1,c	;volatile
+   441   0006F4                     
+   442                           ;nameshift.c: 31:     PORTD=a;
+   443   0006F4  C00A  FF83         	movff	lcdctrl@a,3971	;volatile
+   444   0006F8                     
+   445                           ;nameshift.c: 32:     RC2=1;
+   446   0006F8  8482               	bsf	3970,2,c	;volatile
+   447   0006FA                     
+   448                           ;nameshift.c: 33:     delay(100);
+   449   0006FA  0E64               	movlw	100
+   450   0006FC  6E01               	movwf	delay@time^0,c
+   451   0006FE  0E00               	movlw	0
+   452   000700  6E02               	movwf	(delay@time+1)^0,c
+   453   000702  0E00               	movlw	0
+   454   000704  6E03               	movwf	(delay@time+2)^0,c
+   455   000706  0E00               	movlw	0
+   456   000708  6E04               	movwf	(delay@time+3)^0,c
+   457   00070A  EC37  F003         	call	_delay	;wreg free
+   458   00070E                     
+   459                           ;nameshift.c: 34:     RC2=0;
+   460   00070E  9482               	bcf	3970,2,c	;volatile
+   461   000710                     
+   462                           ;nameshift.c: 35:     delay(5000);
+   463   000710  0E88               	movlw	136
+   464   000712  6E01               	movwf	delay@time^0,c
+   465   000714  0E13               	movlw	19
+   466   000716  6E02               	movwf	(delay@time+1)^0,c
+   467   000718  0E00               	movlw	0
+   468   00071A  6E03               	movwf	(delay@time+2)^0,c
+   469   00071C  0E00               	movlw	0
+   470   00071E  6E04               	movwf	(delay@time+3)^0,c
+   471   000720  EC37  F003         	call	_delay	;wreg free
+   472   000724  0012               	return		;funcret
+   473   000726                     __end_of_lcdctrl:
+   474                           	callstack 0
+   475                           
+   476 ;; *************** function _delay *****************
+   477 ;; Defined at:
+   478 ;;		line 25 in file "nameshift.c"
+   479 ;; Parameters:    Size  Location     Type
+   480 ;;  time            4    0[COMRAM] long 
+   481 ;; Auto vars:     Size  Location     Type
+   482 ;;  i               4    5[COMRAM] long 
+   483 ;; Return value:  Size  Location     Type
+   484 ;;                  1    wreg      void 
+   485 ;; Registers used:
+   486 ;;		wreg, status,2, status,0
+   487 ;; Tracked objects:
+   488 ;;		On entry : 0/0
+   489 ;;		On exit  : 0/0
+   490 ;;		Unchanged: 0/0
+   491 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   492 ;;      Params:         4       0       0       0       0       0       0
+   493 ;;      Locals:         4       0       0       0       0       0       0
+   494 ;;      Temps:          1       0       0       0       0       0       0
+   495 ;;      Totals:         9       0       0       0       0       0       0
+   496 ;;Total ram usage:        9 bytes
+   497 ;; Hardware stack levels used: 1
+   498 ;; This function calls:
+   499 ;;		Nothing
+   500 ;; This function is called by:
+   501 ;;		_lcdctrl
+   502 ;;		_lcddisp
+   503 ;; This function uses a non-reentrant model
+   504 ;;
+   505                           
+   506                           	psect	text4
+   507   00066E                     __ptext4:
+   508                           	callstack 0
+   509   00066E                     _delay:
+   510                           	callstack 28
+   511   00066E                     
+   512                           ;nameshift.c: 26:     for(long int i=0;i<time;i++);
+   513   00066E  0E00               	movlw	0
+   514   000670  6E06               	movwf	delay@i^0,c
+   515   000672  0E00               	movlw	0
+   516   000674  6E07               	movwf	(delay@i+1)^0,c
+   517   000676  0E00               	movlw	0
+   518   000678  6E08               	movwf	(delay@i+2)^0,c
+   519   00067A  0E00               	movlw	0
+   520   00067C  6E09               	movwf	(delay@i+3)^0,c
+   521   00067E  EF47  F003         	goto	l29
+   522   000682                     l784:
+   523   000682  0E01               	movlw	1
+   524   000684  2606               	addwf	delay@i^0,f,c
+   525   000686  0E00               	movlw	0
+   526   000688  2207               	addwfc	(delay@i+1)^0,f,c
+   527   00068A  2208               	addwfc	(delay@i+2)^0,f,c
+   528   00068C  2209               	addwfc	(delay@i+3)^0,f,c
+   529   00068E                     l29:
+   530   00068E  5001               	movf	delay@time^0,w,c
+   531   000690  5C06               	subwf	delay@i^0,w,c
+   532   000692  5002               	movf	(delay@time+1)^0,w,c
+   533   000694  5807               	subwfb	(delay@i+1)^0,w,c
+   534   000696  5003               	movf	(delay@time+2)^0,w,c
+   535   000698  5808               	subwfb	(delay@i+2)^0,w,c
+   536   00069A  5009               	movf	(delay@i+3)^0,w,c
+   537   00069C  0A80               	xorlw	128
+   538   00069E  6E05               	movwf	??_delay^0,c
+   539   0006A0  5004               	movf	(delay@time+3)^0,w,c
+   540   0006A2  0A80               	xorlw	128
+   541   0006A4  5805               	subwfb	??_delay^0,w,c
+   542   0006A6  A0D8               	btfss	status,0,c
+   543   0006A8  EF58  F003         	goto	u41
+   544   0006AC  EF5A  F003         	goto	u40
+   545   0006B0                     u41:
+   546   0006B0  EF41  F003         	goto	l784
+   547   0006B4                     u40:
+   548   0006B4  0012               	return		;funcret
+   549   0006B6                     __end_of_delay:
+   550                           	callstack 0
+   551                           
+   552                           	psect	rparam
+   553   000000                     tosu	equ	0xFFF
+   554                           tosh	equ	0xFFE
+   555                           tosl	equ	0xFFD
+   556                           stkptr	equ	0xFFC
+   557                           pclatu	equ	0xFFB
+   558                           pclath	equ	0xFFA
+   559                           pcl	equ	0xFF9
+   560                           tblptru	equ	0xFF8
+   561                           tblptrh	equ	0xFF7
+   562                           tblptrl	equ	0xFF6
+   563                           tablat	equ	0xFF5
+   564                           prodh	equ	0xFF4
+   565                           prodl	equ	0xFF3
+   566                           indf0	equ	0xFEF
+   567                           postinc0	equ	0xFEE
+   568                           postdec0	equ	0xFED
+   569                           preinc0	equ	0xFEC
+   570                           plusw0	equ	0xFEB
+   571                           fsr0h	equ	0xFEA
+   572                           fsr0l	equ	0xFE9
+   573                           wreg	equ	0xFE8
+   574                           indf1	equ	0xFE7
+   575                           postinc1	equ	0xFE6
+   576                           postdec1	equ	0xFE5
+   577                           preinc1	equ	0xFE4
+   578                           plusw1	equ	0xFE3
+   579                           fsr1h	equ	0xFE2
+   580                           fsr1l	equ	0xFE1
+   581                           bsr	equ	0xFE0
+   582                           indf2	equ	0xFDF
+   583                           postinc2	equ	0xFDE
+   584                           postdec2	equ	0xFDD
+   585                           preinc2	equ	0xFDC
+   586                           plusw2	equ	0xFDB
+   587                           fsr2h	equ	0xFDA
+   588                           fsr2l	equ	0xFD9
+   589                           status	equ	0xFD8
+
+Data Sizes:
+    Strings     6
+    Constant    0
+    Data        0
+    BSS         0
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMRAM           95     15      15
+    BANK0           160      0       0
+    BANK1           256      0       0
+    BANK2           256      0       0
+    BANK3           256      0       0
+    BANK4           256      0       0
+    BANK5           256      0       0
+
+Pointer List with Targets:
+
+    lcdstring@p	PTR const unsigned char  size(1) Largest target is 6
+		 -> STR_1(CODE[6]), 
+
+
+Critical Paths under _main in COMRAM
+
+    _main->_lcdstring
+    _lcdstring->_lcddisp
+    _lcddisp->_delay
+    _lcdctrl->_delay
+
+Critical Paths under _main in BANK0
+
+    None.
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Critical Paths under _main in BANK3
+
+    None.
+
+Critical Paths under _main in BANK4
+
+    None.
+
+Critical Paths under _main in BANK5
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 6     6      0     913
+                                             11 COMRAM     4     4      0
+                            _lcdctrl
+                          _lcdstring
+ ---------------------------------------------------------------------------------
+ (1) _lcdstring                                            1     0      1     493
+                                             10 COMRAM     1     0      1
+                            _lcddisp
+ ---------------------------------------------------------------------------------
+ (2) _lcddisp                                              1     1      0     372
+                                              9 COMRAM     1     1      0
+                              _delay
+ ---------------------------------------------------------------------------------
+ (1) _lcdctrl                                              1     1      0     372
+                                              9 COMRAM     1     1      0
+                              _delay
+ ---------------------------------------------------------------------------------
+ (3) _delay                                                9     5      4     350
+                                              0 COMRAM     9     5      4
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 3
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _lcdctrl
+     _delay
+   _lcdstring
+     _lcddisp
+       _delay
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BITCOMRAM           5F      0       0       0        0.0%
+EEDATA             100      0       0       0        0.0%
+NULL                 0      0       0       0        0.0%
+CODE                 0      0       0       0        0.0%
+COMRAM              5F      F       F       1       15.8%
+STACK                0      0       0       2        0.0%
+DATA                 0      0       0       3        0.0%
+BITBANK0            A0      0       0       4        0.0%
+BANK0               A0      0       0       5        0.0%
+BITBANK1           100      0       0       6        0.0%
+BANK1              100      0       0       7        0.0%
+BITBANK2           100      0       0       8        0.0%
+BANK2              100      0       0       9        0.0%
+BITBANK3           100      0       0      10        0.0%
+BANK3              100      0       0      11        0.0%
+BITBANK4           100      0       0      12        0.0%
+BANK4              100      0       0      13        0.0%
+BITBANK5           100      0       0      14        0.0%
+BANK5              100      0       0      15        0.0%
+BITBIGSFRh          6A      0       0      16        0.0%
+BITBIGSFRlh         10      0       0      17        0.0%
+BITBIGSFRll        282      0       0      18        0.0%
+ABS                  0      0       0      19        0.0%
+BIGRAM             5FF      0       0      20        0.0%
+BIGSFR               0      0       0     200        0.0%
+BITSFR_3             0      0       0     200        0.0%
+SFR_3                0      0       0     200        0.0%
+BITSFR_2             0      0       0     200        0.0%
+SFR_2                0      0       0     200        0.0%
+BITSFR_1             0      0       0     200        0.0%
+SFR_1                0      0       0     200        0.0%
+BITSFR               0      0       0     200        0.0%
+SFR                  0      0       0     200        0.0%
+
+
+Microchip Technology PIC18 Macro Assembler V2.46 build 20240104201356 
+Symbol Table                                                                                   Thu Aug 08 13:50:01 2024
+
+                     l32 06B4                       l35 0724                       l44 0750  
+                     l29 068E                       l38 06EC                       u40 06B4  
+                     u41 06B0                       u50 0750                       u51 074C  
+                     u60 0660                       u61 065C                      l800 06F4  
+                    l802 06F8                      l810 0726                      l804 06FA  
+                    l812 072A                      l820 0610                      l806 070E  
+                    l814 0736                      l830 0632                      l822 0618  
+                    l808 0710                      l816 0738                      l840 0644  
+                    l824 061E                      l842 0660                      l826 0624  
+                    l818 0608                      l836 063A                      l828 062A  
+                    l782 066E                      l790 06C0                      l838 0640  
+                    l784 0682                      l792 06C2                      l794 06D6  
+                    l786 06B8                      l796 06D8                      l788 06BC  
+                    l798 06F0                      _RC0 7C10                      _RC1 7C11  
+                    _RC2 7C12                     STR_1 0601                     _main 0608  
+                   start 0000             ___param_bank 0000                    ?_main 0001  
+                  _PORTD 0F83                    _TRISC 0F94                    _TRISD 0F95  
+        __end_of_lcddisp 06EE          __end_of_lcdctrl 0726                    _delay 066E  
+                  main@j 000C                    tablat 0FF5                    status 0FD8  
+        __initialization 0752             __end_of_main 066E                   ??_main 000C  
+          __activetblptr 0001                   ?_delay 0001                   delay@i 0006  
+                 isa$std 0001                ??_lcddisp 000A                ??_lcdctrl 000A  
+           __mediumconst 0000                   tblptrh 0FF7                   tblptrl 0FF6  
+                 tblptru 0FF8               __accesstop 0060  __end_of__initialization 0752  
+          ___rparam_used 0001           __pcstackCOMRAM 0001            __end_of_delay 06B6  
+                ??_delay 0005                  __Hparam 0000                  __Lparam 0000  
+           __psmallconst 0600                  __pcinit 0752                  __ramtop 0600  
+      __end_of_lcdstring 0752                  __ptext0 0608                  __ptext1 0726  
+                __ptext2 06B6                  __ptext3 06EE                  __ptext4 066E  
+                _lcddisp 06B6                  _lcdctrl 06EE     end_of_initialization 0752  
+    start_initialization 0752               lcdstring@p 000B                 ?_lcddisp 0001  
+               ?_lcdctrl 0001              __smallconst 0600                _lcdstring 0726  
+              delay@time 0001               ?_lcdstring 000B                 __Hrparam 0000  
+               __Lrparam 0000             __Lsmallconst 0600                 isa$xinst 0000  
+               main@j_48 000E                 lcddisp@b 000A                 lcdctrl@a 000A  
+            ??_lcdstring 000C  

@@ -1,0 +1,1002 @@
+
+
+Microchip MPLAB XC8 Assembler V2.46 build 20240104201356 
+                                                                                               Mon Aug 12 08:39:07 2024
+
+Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1 
+     1                           	processor	18F4580
+     2                           	fnconf	rparam,??,?,0
+     3                           	pagewidth 120
+     4                           	opt	flic
+     5                           	psect	cinit,global,reloc=2,class=CODE,delta=1
+     6                           	psect	cstackCOMRAM,global,class=COMRAM,space=1,delta=1,lowdata,noexec
+     7                           	psect	text0,global,reloc=2,class=CODE,delta=1
+     8                           	psect	text1,global,reloc=2,class=CODE,delta=1
+     9                           	psect	text2,global,reloc=2,class=CODE,delta=1
+    10                           	psect	text3,global,reloc=2,class=CODE,delta=1
+    11                           	psect	smallconst,global,reloc=2,class=SMALLCONST,delta=1,noexec
+    12                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1,noexec
+    13                           	psect	rparam,global,class=COMRAM,space=1,delta=1,noexec
+    14   000000                     
+    15                           ; Generated 17/10/2023 GMT
+    16                           ; 
+    17                           ; Copyright © 2023, Microchip Technology Inc. and its subsidiaries ("Microchip")
+    18                           ; All rights reserved.
+    19                           ; 
+    20                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+      +                          ip").
+    21                           ; 
+    22                           ; Redistribution and use in source and binary forms, with or without modification, are
+    23                           ; permitted provided that the following conditions are met:
+    24                           ; 
+    25                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+      +                          t of
+    26                           ;        conditions and the following disclaimer.
+    27                           ; 
+    28                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+      +                          list
+    29                           ;        of conditions and the following disclaimer in the documentation and/or other
+    30                           ;        materials provided with the distribution. Publication is not required when
+    31                           ;        this file is used in an embedded application.
+    32                           ; 
+    33                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+      +                          is
+    34                           ;        software without specific prior written permission.
+    35                           ; 
+    36                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    37                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+      +                          OR
+    38                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+      +                          T,
+    39                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+    40                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+    41                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+      +                          RICT
+    42                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+      +                          SE OF
+    43                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    44                           ; 
+    45                           ; 
+    46                           ; Code-generator required, PIC18F4580 Definitions
+    47                           ; 
+    48                           ; SFR Addresses
+    49   000000                     _RC2	set	31762
+    50   000000                     _RC1	set	31761
+    51   000000                     _RB7	set	31759
+    52   000000                     _RB6	set	31758
+    53   000000                     _RB5	set	31757
+    54   000000                     _RB4	set	31756
+    55   000000                     _PORTB	set	3969
+    56   000000                     _TRISB	set	3987
+    57   000000                     _ADCON1	set	4033
+    58   000000                     _TRISD	set	3989
+    59   000000                     _TRISC	set	3988
+    60   000000                     _PORTD	set	3971
+    61   000000                     _RC0	set	31760
+    62                           
+    63                           ; #config settings
+    64                           
+    65                           	psect	cinit
+    66   000948                     __pcinit:
+    67                           	callstack 0
+    68   000948                     start_initialization:
+    69                           	callstack 0
+    70   000948                     __initialization:
+    71                           	callstack 0
+    72   000948                     end_of_initialization:
+    73                           	callstack 0
+    74   000948                     __end_of__initialization:
+    75                           	callstack 0
+    76   000948  0100               	movlb	0
+    77   00094A  EF01  F003         	goto	_main	;jump to C main() function
+    78                           
+    79                           	psect	cstackCOMRAM
+    80   000001                     __pcstackCOMRAM:
+    81                           	callstack 0
+    82   000001                     delay@time:
+    83                           	callstack 0
+    84                           
+    85                           ; 4 bytes @ 0x0
+    86   000001                     	ds	4
+    87   000005                     ??_delay:
+    88                           
+    89                           ; 1 bytes @ 0x4
+    90   000005                     	ds	1
+    91   000006                     delay@i:
+    92                           	callstack 0
+    93                           
+    94                           ; 4 bytes @ 0x5
+    95   000006                     	ds	4
+    96   00000A                     lcdctrl@a:
+    97                           	callstack 0
+    98   00000A                     lcddisp@b:
+    99                           	callstack 0
+   100                           
+   101                           ; 1 bytes @ 0x9
+   102   00000A                     	ds	1
+   103   00000B                     main@count:
+   104                           	callstack 0
+   105                           
+   106                           ; 2 bytes @ 0xA
+   107   00000B                     	ds	2
+   108                           
+   109 ;;
+   110 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   111 ;;
+   112 ;; *************** function _main *****************
+   113 ;; Defined at:
+   114 ;;		line 7 in file "keypad_matrix.c"
+   115 ;; Parameters:    Size  Location     Type
+   116 ;;		None
+   117 ;; Auto vars:     Size  Location     Type
+   118 ;;  count           2   10[COMRAM] int 
+   119 ;; Return value:  Size  Location     Type
+   120 ;;                  1    wreg      void 
+   121 ;; Registers used:
+   122 ;;		wreg, status,2, status,0, cstack
+   123 ;; Tracked objects:
+   124 ;;		On entry : 0/0
+   125 ;;		On exit  : 0/0
+   126 ;;		Unchanged: 0/0
+   127 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   128 ;;      Params:         0       0       0       0       0       0       0
+   129 ;;      Locals:         2       0       0       0       0       0       0
+   130 ;;      Temps:          0       0       0       0       0       0       0
+   131 ;;      Totals:         2       0       0       0       0       0       0
+   132 ;;Total ram usage:        2 bytes
+   133 ;; Hardware stack levels required when called: 2
+   134 ;; This function calls:
+   135 ;;		_lcdctrl
+   136 ;;		_lcddisp
+   137 ;; This function is called by:
+   138 ;;		Startup code after reset
+   139 ;; This function uses a non-reentrant model
+   140 ;;
+   141                           
+   142                           	psect	text0
+   143   000602                     __ptext0:
+   144                           	callstack 0
+   145   000602                     _main:
+   146                           	callstack 29
+   147   000602                     
+   148                           ;keypad_matrix.c: 8:     ADCON1=0X0F;
+   149   000602  0E0F               	movlw	15
+   150   000604  6EC1               	movwf	193,c	;volatile
+   151                           
+   152                           ;keypad_matrix.c: 9:     TRISB=0XF0;
+   153   000606  0EF0               	movlw	240
+   154   000608  6E93               	movwf	147,c	;volatile
+   155                           
+   156                           ;keypad_matrix.c: 10:     TRISC=0X00;
+   157   00060A  0E00               	movlw	0
+   158   00060C  6E94               	movwf	148,c	;volatile
+   159                           
+   160                           ;keypad_matrix.c: 11:     TRISD=0x00;
+   161   00060E  0E00               	movlw	0
+   162   000610  6E95               	movwf	149,c	;volatile
+   163   000612                     
+   164                           ;keypad_matrix.c: 12:     lcdctrl(0x01);
+   165   000612  0E01               	movlw	1
+   166   000614  EC88  F004         	call	_lcdctrl
+   167   000618                     
+   168                           ;keypad_matrix.c: 14:     int count=0;
+   169   000618  0E00               	movlw	0
+   170   00061A  6E0C               	movwf	(main@count+1)^0,c
+   171   00061C  0E00               	movlw	0
+   172   00061E  6E0B               	movwf	main@count^0,c
+   173   000620                     l934:
+   174                           
+   175                           ;keypad_matrix.c: 17:     {;keypad_matrix.c: 18:     PORTB=0X0e;
+   176   000620  0E0E               	movlw	14
+   177   000622  6E81               	movwf	129,c	;volatile
+   178   000624                     
+   179                           ;keypad_matrix.c: 19:     if(RB4==0)
+   180   000624  B881               	btfsc	3969,4,c	;volatile
+   181   000626  EF17  F003         	goto	u351
+   182   00062A  EF19  F003         	goto	u350
+   183   00062E                     u351:
+   184   00062E  EF25  F003         	goto	l36
+   185   000632                     u350:
+   186   000632                     
+   187                           ;keypad_matrix.c: 20:     {;keypad_matrix.c: 22:         lcddisp('9');
+   188   000632  0E39               	movlw	57
+   189   000634  EC6C  F004         	call	_lcddisp
+   190   000638                     l37:
+   191   000638  A881               	btfss	3969,4,c	;volatile
+   192   00063A  EF21  F003         	goto	u361
+   193   00063E  EF23  F003         	goto	u360
+   194   000642                     u361:
+   195   000642  EF1C  F003         	goto	l37
+   196   000646                     u360:
+   197   000646  EF62  F003         	goto	l946
+   198   00064A                     l36:
+   199   00064A  BA81               	btfsc	3969,5,c	;volatile
+   200   00064C  EF2A  F003         	goto	u371
+   201   000650  EF2C  F003         	goto	u370
+   202   000654                     u371:
+   203   000654  EF38  F003         	goto	l41
+   204   000658                     u370:
+   205   000658                     
+   206                           ;keypad_matrix.c: 26:     {;keypad_matrix.c: 28:         lcddisp('8');
+   207   000658  0E38               	movlw	56
+   208   00065A  EC6C  F004         	call	_lcddisp
+   209   00065E                     l42:
+   210   00065E  AA81               	btfss	3969,5,c	;volatile
+   211   000660  EF34  F003         	goto	u381
+   212   000664  EF36  F003         	goto	u380
+   213   000668                     u381:
+   214   000668  EF2F  F003         	goto	l42
+   215   00066C                     u380:
+   216   00066C  EF62  F003         	goto	l946
+   217   000670                     l41:
+   218   000670  BC81               	btfsc	3969,6,c	;volatile
+   219   000672  EF3D  F003         	goto	u391
+   220   000676  EF3F  F003         	goto	u390
+   221   00067A                     u391:
+   222   00067A  EF4B  F003         	goto	l46
+   223   00067E                     u390:
+   224   00067E                     
+   225                           ;keypad_matrix.c: 33:     {;keypad_matrix.c: 34:         lcddisp('7');
+   226   00067E  0E37               	movlw	55
+   227   000680  EC6C  F004         	call	_lcddisp
+   228   000684                     l47:
+   229   000684  AC81               	btfss	3969,6,c	;volatile
+   230   000686  EF47  F003         	goto	u401
+   231   00068A  EF49  F003         	goto	u400
+   232   00068E                     u401:
+   233   00068E  EF42  F003         	goto	l47
+   234   000692                     u400:
+   235   000692  EF62  F003         	goto	l946
+   236   000696                     l46:
+   237   000696  BE81               	btfsc	3969,7,c	;volatile
+   238   000698  EF50  F003         	goto	u411
+   239   00069C  EF52  F003         	goto	u410
+   240   0006A0                     u411:
+   241   0006A0  EF62  F003         	goto	l946
+   242   0006A4                     u410:
+   243   0006A4                     
+   244                           ;keypad_matrix.c: 38:     {;keypad_matrix.c: 39:        lcdctrl(0x10);
+   245   0006A4  0E10               	movlw	16
+   246   0006A6  EC88  F004         	call	_lcdctrl
+   247                           
+   248                           ;keypad_matrix.c: 40:        lcddisp(' ');
+   249   0006AA  0E20               	movlw	32
+   250   0006AC  EC6C  F004         	call	_lcddisp
+   251                           
+   252                           ;keypad_matrix.c: 41:        lcdctrl(0x10);
+   253   0006B0  0E10               	movlw	16
+   254   0006B2  EC88  F004         	call	_lcdctrl
+   255   0006B6                     l52:
+   256   0006B6  AE81               	btfss	3969,7,c	;volatile
+   257   0006B8  EF60  F003         	goto	u421
+   258   0006BC  EF62  F003         	goto	u420
+   259   0006C0                     u421:
+   260   0006C0  EF5B  F003         	goto	l52
+   261   0006C4                     u420:
+   262   0006C4                     l946:
+   263                           
+   264                           ;keypad_matrix.c: 44:     PORTB=0X0D;
+   265   0006C4  0E0D               	movlw	13
+   266   0006C6  6E81               	movwf	129,c	;volatile
+   267   0006C8                     
+   268                           ;keypad_matrix.c: 45:      if(RB4==0)
+   269   0006C8  B881               	btfsc	3969,4,c	;volatile
+   270   0006CA  EF69  F003         	goto	u431
+   271   0006CE  EF6B  F003         	goto	u430
+   272   0006D2                     u431:
+   273   0006D2  EF77  F003         	goto	l55
+   274   0006D6                     u430:
+   275   0006D6                     
+   276                           ;keypad_matrix.c: 46:     {;keypad_matrix.c: 48:         lcddisp('6');
+   277   0006D6  0E36               	movlw	54
+   278   0006D8  EC6C  F004         	call	_lcddisp
+   279   0006DC                     l56:
+   280   0006DC  A881               	btfss	3969,4,c	;volatile
+   281   0006DE  EF73  F003         	goto	u441
+   282   0006E2  EF75  F003         	goto	u440
+   283   0006E6                     u441:
+   284   0006E6  EF6E  F003         	goto	l56
+   285   0006EA                     u440:
+   286   0006EA  EF9B  F003         	goto	l956
+   287   0006EE                     l55:
+   288   0006EE  BA81               	btfsc	3969,5,c	;volatile
+   289   0006F0  EF7C  F003         	goto	u451
+   290   0006F4  EF7E  F003         	goto	u450
+   291   0006F8                     u451:
+   292   0006F8  EF8A  F003         	goto	l60
+   293   0006FC                     u450:
+   294   0006FC                     
+   295                           ;keypad_matrix.c: 52:     {;keypad_matrix.c: 54:         lcddisp('5');
+   296   0006FC  0E35               	movlw	53
+   297   0006FE  EC6C  F004         	call	_lcddisp
+   298   000702                     l61:
+   299   000702  AA81               	btfss	3969,5,c	;volatile
+   300   000704  EF86  F003         	goto	u461
+   301   000708  EF88  F003         	goto	u460
+   302   00070C                     u461:
+   303   00070C  EF81  F003         	goto	l61
+   304   000710                     u460:
+   305   000710  EF9B  F003         	goto	l956
+   306   000714                     l60:
+   307   000714  BC81               	btfsc	3969,6,c	;volatile
+   308   000716  EF8F  F003         	goto	u471
+   309   00071A  EF91  F003         	goto	u470
+   310   00071E                     u471:
+   311   00071E  EF9B  F003         	goto	l956
+   312   000722                     u470:
+   313   000722                     
+   314                           ;keypad_matrix.c: 58:     {;keypad_matrix.c: 60:         lcddisp('4');
+   315   000722  0E34               	movlw	52
+   316   000724  EC6C  F004         	call	_lcddisp
+   317   000728                     l66:
+   318   000728  AC81               	btfss	3969,6,c	;volatile
+   319   00072A  EF99  F003         	goto	u481
+   320   00072E  EF9B  F003         	goto	u480
+   321   000732                     u481:
+   322   000732  EF94  F003         	goto	l66
+   323   000736                     u480:
+   324   000736                     l956:
+   325                           
+   326                           ;keypad_matrix.c: 64:     PORTB=0X0B;
+   327   000736  0E0B               	movlw	11
+   328   000738  6E81               	movwf	129,c	;volatile
+   329   00073A                     
+   330                           ;keypad_matrix.c: 65:      if(RB4==0)
+   331   00073A  B881               	btfsc	3969,4,c	;volatile
+   332   00073C  EFA2  F003         	goto	u491
+   333   000740  EFA4  F003         	goto	u490
+   334   000744                     u491:
+   335   000744  EFB0  F003         	goto	l69
+   336   000748                     u490:
+   337   000748                     
+   338                           ;keypad_matrix.c: 66:     {;keypad_matrix.c: 68:         lcddisp('3');
+   339   000748  0E33               	movlw	51
+   340   00074A  EC6C  F004         	call	_lcddisp
+   341   00074E                     l70:
+   342   00074E  A881               	btfss	3969,4,c	;volatile
+   343   000750  EFAC  F003         	goto	u501
+   344   000754  EFAE  F003         	goto	u500
+   345   000758                     u501:
+   346   000758  EFA7  F003         	goto	l70
+   347   00075C                     u500:
+   348   00075C  EFD4  F003         	goto	l966
+   349   000760                     l69:
+   350   000760  BA81               	btfsc	3969,5,c	;volatile
+   351   000762  EFB5  F003         	goto	u511
+   352   000766  EFB7  F003         	goto	u510
+   353   00076A                     u511:
+   354   00076A  EFC3  F003         	goto	l74
+   355   00076E                     u510:
+   356   00076E                     
+   357                           ;keypad_matrix.c: 72:     {;keypad_matrix.c: 74:         lcddisp('2');
+   358   00076E  0E32               	movlw	50
+   359   000770  EC6C  F004         	call	_lcddisp
+   360   000774                     l75:
+   361   000774  AA81               	btfss	3969,5,c	;volatile
+   362   000776  EFBF  F003         	goto	u521
+   363   00077A  EFC1  F003         	goto	u520
+   364   00077E                     u521:
+   365   00077E  EFBA  F003         	goto	l75
+   366   000782                     u520:
+   367   000782  EFD4  F003         	goto	l966
+   368   000786                     l74:
+   369   000786  BC81               	btfsc	3969,6,c	;volatile
+   370   000788  EFC8  F003         	goto	u531
+   371   00078C  EFCA  F003         	goto	u530
+   372   000790                     u531:
+   373   000790  EFD4  F003         	goto	l966
+   374   000794                     u530:
+   375   000794                     
+   376                           ;keypad_matrix.c: 78:     {;keypad_matrix.c: 80:         lcddisp('1');
+   377   000794  0E31               	movlw	49
+   378   000796  EC6C  F004         	call	_lcddisp
+   379   00079A                     l80:
+   380   00079A  AC81               	btfss	3969,6,c	;volatile
+   381   00079C  EFD2  F003         	goto	u541
+   382   0007A0  EFD4  F003         	goto	u540
+   383   0007A4                     u541:
+   384   0007A4  EFCD  F003         	goto	l80
+   385   0007A8                     u540:
+   386   0007A8                     l966:
+   387                           
+   388                           ;keypad_matrix.c: 83:     PORTB=0X07;
+   389   0007A8  0E07               	movlw	7
+   390   0007AA  6E81               	movwf	129,c	;volatile
+   391   0007AC                     
+   392                           ;keypad_matrix.c: 84:     if(RB4==0)
+   393   0007AC  B881               	btfsc	3969,4,c	;volatile
+   394   0007AE  EFDB  F003         	goto	u551
+   395   0007B2  EFDD  F003         	goto	u550
+   396   0007B6                     u551:
+   397   0007B6  EF11  F004         	goto	l83
+   398   0007BA                     u550:
+   399   0007BA                     
+   400                           ;keypad_matrix.c: 85:     {;keypad_matrix.c: 86:         if(count==2){
+   401   0007BA  0E02               	movlw	2
+   402   0007BC  180B               	xorwf	main@count^0,w,c
+   403   0007BE  100C               	iorwf	(main@count+1)^0,w,c
+   404   0007C0  A4D8               	btfss	status,2,c
+   405   0007C2  EFE5  F003         	goto	u561
+   406   0007C6  EFE7  F003         	goto	u560
+   407   0007CA                     u561:
+   408   0007CA  EFEB  F003         	goto	l974
+   409   0007CE                     u560:
+   410   0007CE                     
+   411                           ;keypad_matrix.c: 87:             count=0;
+   412   0007CE  0E00               	movlw	0
+   413   0007D0  6E0C               	movwf	(main@count+1)^0,c
+   414   0007D2  0E00               	movlw	0
+   415   0007D4  6E0B               	movwf	main@count^0,c
+   416   0007D6                     l974:
+   417                           
+   418                           ;keypad_matrix.c: 89:         count++;
+   419   0007D6  4A0B               	infsnz	main@count^0,f,c
+   420   0007D8  2A0C               	incf	(main@count+1)^0,f,c
+   421   0007DA                     l85:
+   422   0007DA  A881               	btfss	3969,4,c	;volatile
+   423   0007DC  EFF2  F003         	goto	u571
+   424   0007E0  EFF4  F003         	goto	u570
+   425   0007E4                     u571:
+   426   0007E4  EFED  F003         	goto	l85
+   427   0007E8                     u570:
+   428   0007E8                     
+   429                           ;keypad_matrix.c: 93:     if(count==1){
+   430   0007E8  040B               	decf	main@count^0,w,c
+   431   0007EA  100C               	iorwf	(main@count+1)^0,w,c
+   432   0007EC  A4D8               	btfss	status,2,c
+   433   0007EE  EFFB  F003         	goto	u581
+   434   0007F2  EFFD  F003         	goto	u580
+   435   0007F6                     u581:
+   436   0007F6  EF02  F004         	goto	l980
+   437   0007FA                     u580:
+   438   0007FA                     
+   439                           ;keypad_matrix.c: 94:         lcdctrl(0x0f);
+   440   0007FA  0E0F               	movlw	15
+   441   0007FC  EC88  F004         	call	_lcdctrl
+   442                           
+   443                           ;keypad_matrix.c: 95:     }
+   444   000800  EF10  F003         	goto	l934
+   445   000804                     l980:
+   446   000804  0E02               	movlw	2
+   447   000806  180B               	xorwf	main@count^0,w,c
+   448   000808  100C               	iorwf	(main@count+1)^0,w,c
+   449   00080A  A4D8               	btfss	status,2,c
+   450   00080C  EF0A  F004         	goto	u591
+   451   000810  EF0C  F004         	goto	u590
+   452   000814                     u591:
+   453   000814  EF44  F004         	goto	l91
+   454   000818                     u590:
+   455   000818                     
+   456                           ;keypad_matrix.c: 97:         lcdctrl(0x08);
+   457   000818  0E08               	movlw	8
+   458   00081A  EC88  F004         	call	_lcdctrl
+   459   00081E  EF10  F003         	goto	l934
+   460   000822                     l83:
+   461   000822  BA81               	btfsc	3969,5,c	;volatile
+   462   000824  EF16  F004         	goto	u601
+   463   000828  EF18  F004         	goto	u600
+   464   00082C                     u601:
+   465   00082C  EF24  F004         	goto	l92
+   466   000830                     u600:
+   467   000830                     
+   468                           ;keypad_matrix.c: 101:     {;keypad_matrix.c: 102:         lcdctrl(0x01);
+   469   000830  0E01               	movlw	1
+   470   000832  EC88  F004         	call	_lcdctrl
+   471   000836                     l93:
+   472   000836  AA81               	btfss	3969,5,c	;volatile
+   473   000838  EF20  F004         	goto	u611
+   474   00083C  EF22  F004         	goto	u610
+   475   000840                     u611:
+   476   000840  EF1B  F004         	goto	l93
+   477   000844                     u610:
+   478   000844  EF10  F003         	goto	l934
+   479   000848                     l92:
+   480   000848  BC81               	btfsc	3969,6,c	;volatile
+   481   00084A  EF29  F004         	goto	u621
+   482   00084E  EF2B  F004         	goto	u620
+   483   000852                     u621:
+   484   000852  EF34  F004         	goto	l97
+   485   000856                     u620:
+   486   000856                     l98:
+   487   000856  AC81               	btfss	3969,6,c	;volatile
+   488   000858  EF30  F004         	goto	u631
+   489   00085C  EF32  F004         	goto	u630
+   490   000860                     u631:
+   491   000860  EF2B  F004         	goto	l98
+   492   000864                     u630:
+   493   000864  EF10  F003         	goto	l934
+   494   000868                     l97:
+   495   000868  BE81               	btfsc	3969,7,c	;volatile
+   496   00086A  EF39  F004         	goto	u641
+   497   00086E  EF3B  F004         	goto	u640
+   498   000872                     u641:
+   499   000872  EF10  F003         	goto	l934
+   500   000876                     u640:
+   501   000876                     l103:
+   502   000876  AE81               	btfss	3969,7,c	;volatile
+   503   000878  EF40  F004         	goto	u651
+   504   00087C  EF42  F004         	goto	u650
+   505   000880                     u651:
+   506   000880  EF3B  F004         	goto	l103
+   507   000884                     u650:
+   508   000884  EF10  F003         	goto	l934
+   509   000888                     l91:
+   510   000888  EF10  F003         	goto	l934
+   511   00088C  EF00  F000         	goto	start
+   512   000890                     __end_of_main:
+   513                           	callstack 0
+   514                           
+   515 ;; *************** function _lcddisp *****************
+   516 ;; Defined at:
+   517 ;;		line 132 in file "keypad_matrix.c"
+   518 ;; Parameters:    Size  Location     Type
+   519 ;;  b               1    wreg     unsigned char 
+   520 ;; Auto vars:     Size  Location     Type
+   521 ;;  b               1    9[COMRAM] unsigned char 
+   522 ;; Return value:  Size  Location     Type
+   523 ;;                  1    wreg      void 
+   524 ;; Registers used:
+   525 ;;		wreg, status,2, status,0, cstack
+   526 ;; Tracked objects:
+   527 ;;		On entry : 0/0
+   528 ;;		On exit  : 0/0
+   529 ;;		Unchanged: 0/0
+   530 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   531 ;;      Params:         0       0       0       0       0       0       0
+   532 ;;      Locals:         1       0       0       0       0       0       0
+   533 ;;      Temps:          0       0       0       0       0       0       0
+   534 ;;      Totals:         1       0       0       0       0       0       0
+   535 ;;Total ram usage:        1 bytes
+   536 ;; Hardware stack levels used: 1
+   537 ;; Hardware stack levels required when called: 1
+   538 ;; This function calls:
+   539 ;;		_delay
+   540 ;; This function is called by:
+   541 ;;		_main
+   542 ;;		_lcdstring
+   543 ;; This function uses a non-reentrant model
+   544 ;;
+   545                           
+   546                           	psect	text1
+   547   0008D8                     __ptext1:
+   548                           	callstack 0
+   549   0008D8                     _lcddisp:
+   550                           	callstack 29
+   551                           
+   552                           ;incstack = 0
+   553                           ;lcddisp@b stored from wreg
+   554   0008D8  6E0A               	movwf	lcddisp@b^0,c
+   555   0008DA                     
+   556                           ;keypad_matrix.c: 133:     RC0=1;
+   557   0008DA  8082               	bsf	3970,0,c	;volatile
+   558                           
+   559                           ;keypad_matrix.c: 134:     RC1=0;
+   560   0008DC  9282               	bcf	3970,1,c	;volatile
+   561   0008DE                     
+   562                           ;keypad_matrix.c: 135:     PORTD=b;
+   563   0008DE  C00A  FF83         	movff	lcddisp@b,3971	;volatile
+   564   0008E2                     
+   565                           ;keypad_matrix.c: 136:     RC2=1;
+   566   0008E2  8482               	bsf	3970,2,c	;volatile
+   567   0008E4                     
+   568                           ;keypad_matrix.c: 137:     delay(100);
+   569   0008E4  0E64               	movlw	100
+   570   0008E6  6E01               	movwf	delay@time^0,c
+   571   0008E8  0E00               	movlw	0
+   572   0008EA  6E02               	movwf	(delay@time+1)^0,c
+   573   0008EC  0E00               	movlw	0
+   574   0008EE  6E03               	movwf	(delay@time+2)^0,c
+   575   0008F0  0E00               	movlw	0
+   576   0008F2  6E04               	movwf	(delay@time+3)^0,c
+   577   0008F4  EC48  F004         	call	_delay	;wreg free
+   578   0008F8                     
+   579                           ;keypad_matrix.c: 138:     RC2=0;
+   580   0008F8  9482               	bcf	3970,2,c	;volatile
+   581   0008FA                     
+   582                           ;keypad_matrix.c: 139:     delay(5000);
+   583   0008FA  0E88               	movlw	136
+   584   0008FC  6E01               	movwf	delay@time^0,c
+   585   0008FE  0E13               	movlw	19
+   586   000900  6E02               	movwf	(delay@time+1)^0,c
+   587   000902  0E00               	movlw	0
+   588   000904  6E03               	movwf	(delay@time+2)^0,c
+   589   000906  0E00               	movlw	0
+   590   000908  6E04               	movwf	(delay@time+3)^0,c
+   591   00090A  EC48  F004         	call	_delay	;wreg free
+   592   00090E  0012               	return		;funcret
+   593   000910                     __end_of_lcddisp:
+   594                           	callstack 0
+   595                           
+   596 ;; *************** function _lcdctrl *****************
+   597 ;; Defined at:
+   598 ;;		line 123 in file "keypad_matrix.c"
+   599 ;; Parameters:    Size  Location     Type
+   600 ;;  a               1    wreg     unsigned char 
+   601 ;; Auto vars:     Size  Location     Type
+   602 ;;  a               1    9[COMRAM] unsigned char 
+   603 ;; Return value:  Size  Location     Type
+   604 ;;                  1    wreg      void 
+   605 ;; Registers used:
+   606 ;;		wreg, status,2, status,0, cstack
+   607 ;; Tracked objects:
+   608 ;;		On entry : 0/0
+   609 ;;		On exit  : 0/0
+   610 ;;		Unchanged: 0/0
+   611 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   612 ;;      Params:         0       0       0       0       0       0       0
+   613 ;;      Locals:         1       0       0       0       0       0       0
+   614 ;;      Temps:          0       0       0       0       0       0       0
+   615 ;;      Totals:         1       0       0       0       0       0       0
+   616 ;;Total ram usage:        1 bytes
+   617 ;; Hardware stack levels used: 1
+   618 ;; Hardware stack levels required when called: 1
+   619 ;; This function calls:
+   620 ;;		_delay
+   621 ;; This function is called by:
+   622 ;;		_main
+   623 ;; This function uses a non-reentrant model
+   624 ;;
+   625                           
+   626                           	psect	text2
+   627   000910                     __ptext2:
+   628                           	callstack 0
+   629   000910                     _lcdctrl:
+   630                           	callstack 29
+   631                           
+   632                           ;incstack = 0
+   633                           ;lcdctrl@a stored from wreg
+   634   000910  6E0A               	movwf	lcdctrl@a^0,c
+   635   000912                     
+   636                           ;keypad_matrix.c: 124:     RC0=0;
+   637   000912  9082               	bcf	3970,0,c	;volatile
+   638                           
+   639                           ;keypad_matrix.c: 125:     RC1=0;
+   640   000914  9282               	bcf	3970,1,c	;volatile
+   641   000916                     
+   642                           ;keypad_matrix.c: 126:     PORTD=a;
+   643   000916  C00A  FF83         	movff	lcdctrl@a,3971	;volatile
+   644   00091A                     
+   645                           ;keypad_matrix.c: 127:     RC2=1;
+   646   00091A  8482               	bsf	3970,2,c	;volatile
+   647   00091C                     
+   648                           ;keypad_matrix.c: 128:     delay(100);
+   649   00091C  0E64               	movlw	100
+   650   00091E  6E01               	movwf	delay@time^0,c
+   651   000920  0E00               	movlw	0
+   652   000922  6E02               	movwf	(delay@time+1)^0,c
+   653   000924  0E00               	movlw	0
+   654   000926  6E03               	movwf	(delay@time+2)^0,c
+   655   000928  0E00               	movlw	0
+   656   00092A  6E04               	movwf	(delay@time+3)^0,c
+   657   00092C  EC48  F004         	call	_delay	;wreg free
+   658   000930                     
+   659                           ;keypad_matrix.c: 129:     RC2=0;
+   660   000930  9482               	bcf	3970,2,c	;volatile
+   661   000932                     
+   662                           ;keypad_matrix.c: 130:     delay(5000);
+   663   000932  0E88               	movlw	136
+   664   000934  6E01               	movwf	delay@time^0,c
+   665   000936  0E13               	movlw	19
+   666   000938  6E02               	movwf	(delay@time+1)^0,c
+   667   00093A  0E00               	movlw	0
+   668   00093C  6E03               	movwf	(delay@time+2)^0,c
+   669   00093E  0E00               	movlw	0
+   670   000940  6E04               	movwf	(delay@time+3)^0,c
+   671   000942  EC48  F004         	call	_delay	;wreg free
+   672   000946  0012               	return		;funcret
+   673   000948                     __end_of_lcdctrl:
+   674                           	callstack 0
+   675                           
+   676 ;; *************** function _delay *****************
+   677 ;; Defined at:
+   678 ;;		line 120 in file "keypad_matrix.c"
+   679 ;; Parameters:    Size  Location     Type
+   680 ;;  time            4    0[COMRAM] long 
+   681 ;; Auto vars:     Size  Location     Type
+   682 ;;  i               4    5[COMRAM] long 
+   683 ;; Return value:  Size  Location     Type
+   684 ;;                  1    wreg      void 
+   685 ;; Registers used:
+   686 ;;		wreg, status,2, status,0
+   687 ;; Tracked objects:
+   688 ;;		On entry : 0/0
+   689 ;;		On exit  : 0/0
+   690 ;;		Unchanged: 0/0
+   691 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   692 ;;      Params:         4       0       0       0       0       0       0
+   693 ;;      Locals:         4       0       0       0       0       0       0
+   694 ;;      Temps:          1       0       0       0       0       0       0
+   695 ;;      Totals:         9       0       0       0       0       0       0
+   696 ;;Total ram usage:        9 bytes
+   697 ;; Hardware stack levels used: 1
+   698 ;; This function calls:
+   699 ;;		Nothing
+   700 ;; This function is called by:
+   701 ;;		_lcdctrl
+   702 ;;		_lcddisp
+   703 ;; This function uses a non-reentrant model
+   704 ;;
+   705                           
+   706                           	psect	text3
+   707   000890                     __ptext3:
+   708                           	callstack 0
+   709   000890                     _delay:
+   710                           	callstack 29
+   711   000890                     
+   712                           ;keypad_matrix.c: 121:     for(long int i=0;i<time;i++);
+   713   000890  0E00               	movlw	0
+   714   000892  6E06               	movwf	delay@i^0,c
+   715   000894  0E00               	movlw	0
+   716   000896  6E07               	movwf	(delay@i+1)^0,c
+   717   000898  0E00               	movlw	0
+   718   00089A  6E08               	movwf	(delay@i+2)^0,c
+   719   00089C  0E00               	movlw	0
+   720   00089E  6E09               	movwf	(delay@i+3)^0,c
+   721   0008A0  EF58  F004         	goto	l111
+   722   0008A4                     l902:
+   723   0008A4  0E01               	movlw	1
+   724   0008A6  2606               	addwf	delay@i^0,f,c
+   725   0008A8  0E00               	movlw	0
+   726   0008AA  2207               	addwfc	(delay@i+1)^0,f,c
+   727   0008AC  2208               	addwfc	(delay@i+2)^0,f,c
+   728   0008AE  2209               	addwfc	(delay@i+3)^0,f,c
+   729   0008B0                     l111:
+   730   0008B0  5001               	movf	delay@time^0,w,c
+   731   0008B2  5C06               	subwf	delay@i^0,w,c
+   732   0008B4  5002               	movf	(delay@time+1)^0,w,c
+   733   0008B6  5807               	subwfb	(delay@i+1)^0,w,c
+   734   0008B8  5003               	movf	(delay@time+2)^0,w,c
+   735   0008BA  5808               	subwfb	(delay@i+2)^0,w,c
+   736   0008BC  5009               	movf	(delay@i+3)^0,w,c
+   737   0008BE  0A80               	xorlw	128
+   738   0008C0  6E05               	movwf	??_delay^0,c
+   739   0008C2  5004               	movf	(delay@time+3)^0,w,c
+   740   0008C4  0A80               	xorlw	128
+   741   0008C6  5805               	subwfb	??_delay^0,w,c
+   742   0008C8  A0D8               	btfss	status,0,c
+   743   0008CA  EF69  F004         	goto	u341
+   744   0008CE  EF6B  F004         	goto	u340
+   745   0008D2                     u341:
+   746   0008D2  EF52  F004         	goto	l902
+   747   0008D6                     u340:
+   748   0008D6  0012               	return		;funcret
+   749   0008D8                     __end_of_delay:
+   750                           	callstack 0
+   751                           
+   752                           	psect	smallconst
+   753   000600                     __psmallconst:
+   754                           	callstack 0
+   755   000600  00                 	db	0
+   756   000601  00                 	db	0	; dummy byte at the end
+   757   000000                     
+   758                           	psect	rparam
+   759   000000                     tosu	equ	0xFFF
+   760                           tosh	equ	0xFFE
+   761                           tosl	equ	0xFFD
+   762                           stkptr	equ	0xFFC
+   763                           pclatu	equ	0xFFB
+   764                           pclath	equ	0xFFA
+   765                           pcl	equ	0xFF9
+   766                           tblptru	equ	0xFF8
+   767                           tblptrh	equ	0xFF7
+   768                           tblptrl	equ	0xFF6
+   769                           tablat	equ	0xFF5
+   770                           prodh	equ	0xFF4
+   771                           prodl	equ	0xFF3
+   772                           indf0	equ	0xFEF
+   773                           postinc0	equ	0xFEE
+   774                           postdec0	equ	0xFED
+   775                           preinc0	equ	0xFEC
+   776                           plusw0	equ	0xFEB
+   777                           fsr0h	equ	0xFEA
+   778                           fsr0l	equ	0xFE9
+   779                           wreg	equ	0xFE8
+   780                           indf1	equ	0xFE7
+   781                           postinc1	equ	0xFE6
+   782                           postdec1	equ	0xFE5
+   783                           preinc1	equ	0xFE4
+   784                           plusw1	equ	0xFE3
+   785                           fsr1h	equ	0xFE2
+   786                           fsr1l	equ	0xFE1
+   787                           bsr	equ	0xFE0
+   788                           indf2	equ	0xFDF
+   789                           postinc2	equ	0xFDE
+   790                           postdec2	equ	0xFDD
+   791                           preinc2	equ	0xFDC
+   792                           plusw2	equ	0xFDB
+   793                           fsr2h	equ	0xFDA
+   794                           fsr2l	equ	0xFD9
+   795                           status	equ	0xFD8
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        0
+    BSS         0
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMRAM           95     12      12
+    BANK0           160      0       0
+    BANK1           256      0       0
+    BANK2           256      0       0
+    BANK3           256      0       0
+    BANK4           256      0       0
+    BANK5           256      0       0
+
+Pointer List with Targets:
+
+    None.
+
+Critical Paths under _main in COMRAM
+
+    _main->_lcdctrl
+    _main->_lcddisp
+    _lcddisp->_delay
+    _lcdctrl->_delay
+
+Critical Paths under _main in BANK0
+
+    None.
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Critical Paths under _main in BANK3
+
+    None.
+
+Critical Paths under _main in BANK4
+
+    None.
+
+Critical Paths under _main in BANK5
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 2     2      0     813
+                                             10 COMRAM     2     2      0
+                            _lcdctrl
+                            _lcddisp
+ ---------------------------------------------------------------------------------
+ (1) _lcddisp                                              1     1      0     372
+                                              9 COMRAM     1     1      0
+                              _delay
+ ---------------------------------------------------------------------------------
+ (1) _lcdctrl                                              1     1      0     372
+                                              9 COMRAM     1     1      0
+                              _delay
+ ---------------------------------------------------------------------------------
+ (2) _delay                                                9     5      4     350
+                                              0 COMRAM     9     5      4
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 2
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _lcdctrl
+     _delay
+   _lcddisp
+     _delay
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BITCOMRAM           5F      0       0       0        0.0%
+EEDATA             100      0       0       0        0.0%
+NULL                 0      0       0       0        0.0%
+CODE                 0      0       0       0        0.0%
+COMRAM              5F      C       C       1       12.6%
+STACK                0      0       0       2        0.0%
+DATA                 0      0       0       3        0.0%
+BITBANK0            A0      0       0       4        0.0%
+BANK0               A0      0       0       5        0.0%
+BITBANK1           100      0       0       6        0.0%
+BANK1              100      0       0       7        0.0%
+BITBANK2           100      0       0       8        0.0%
+BANK2              100      0       0       9        0.0%
+BITBANK3           100      0       0      10        0.0%
+BANK3              100      0       0      11        0.0%
+BITBANK4           100      0       0      12        0.0%
+BANK4              100      0       0      13        0.0%
+BITBANK5           100      0       0      14        0.0%
+BANK5              100      0       0      15        0.0%
+BITBIGSFRh          3E      0       0      16        0.0%
+BITBIGSFRlh         2B      0       0      17        0.0%
+BITBIGSFRllh         F      0       0      18        0.0%
+BITBIGSFRlll       281      0       0      19        0.0%
+ABS                  0      0       0      20        0.0%
+BIGRAM             5FF      0       0      21        0.0%
+BIGSFR               0      0       0     200        0.0%
+BITSFR_3             0      0       0     200        0.0%
+SFR_3                0      0       0     200        0.0%
+BITSFR_2             0      0       0     200        0.0%
+SFR_2                0      0       0     200        0.0%
+BITSFR_1             0      0       0     200        0.0%
+SFR_1                0      0       0     200        0.0%
+BITSFR               0      0       0     200        0.0%
+SFR                  0      0       0     200        0.0%
+
+
+Microchip Technology PIC18 Macro Assembler V2.46 build 20240104201356 
+Symbol Table                                                                                   Mon Aug 12 08:39:07 2024
+
+                     l41 0670                       l42 065E                       l60 0714  
+                     l52 06B6                       l36 064A                       l61 0702  
+                     l37 0638                       l70 074E                       l46 0696  
+                     l55 06EE                       l47 0684                       l80 079A  
+                     l56 06DC                       l74 0786                       l66 0728  
+                     l91 0888                       l83 0822                       l75 0774  
+                     l92 0848                       l93 0836                       l85 07DA  
+                     l69 0760                       l97 0868                       l98 0856  
+                    l111 08B0                      l103 0876                      l120 090E  
+                    l114 08D6                      l117 0946                      l900 0890  
+                    l902 08A4                      l910 091C                      l912 0930  
+                    l904 0912                      l920 08E2                      l914 0932  
+                    l906 0916                      l922 08E4                      l930 0612  
+                    l908 091A                      l924 08F8                      l916 08DA  
+                    l940 0658                      l932 0618                      l926 08FA  
+                    l918 08DE                      l950 06D6                      l942 067E  
+                    l934 0620                      l960 0748                      l952 06FC  
+                    l944 06A4                      l936 0624                      l928 0602  
+                    l970 07BA                      l962 076E                      l954 0722  
+                    l946 06C4                      l938 0632                      l980 0804  
+                    l972 07CE                      l964 0794                      l956 0736  
+                    l948 06C8                      l982 0818                      l974 07D6  
+                    l966 07A8                      l958 073A                      l984 0830  
+                    l976 07E8                      l968 07AC                      l978 07FA  
+                    _RC0 7C10                      _RC1 7C11                      _RB4 7C0C  
+                    _RC2 7C12                      _RB5 7C0D                      _RB6 7C0E  
+                    _RB7 7C0F                      u400 0692                      u401 068E  
+                    u410 06A4                      u411 06A0                      u340 08D6  
+                    u500 075C                      u420 06C4                      u341 08D2  
+                    u501 0758                      u421 06C0                      u510 076E  
+                    u430 06D6                      u350 0632                      u511 076A  
+                    u431 06D2                      u351 062E                      u600 0830  
+                    u520 0782                      u440 06EA                      u360 0646  
+                    u601 082C                      u521 077E                      u441 06E6  
+                    u361 0642                      u610 0844                      u530 0794  
+                    u450 06FC                      u370 0658                      u611 0840  
+                    u531 0790                      u451 06F8                      u371 0654  
+                    u620 0856                      u540 07A8                      u460 0710  
+                    u380 066C                      u621 0852                      u541 07A4  
+                    u461 070C                      u381 0668                      u630 0864  
+                    u550 07BA                      u470 0722                      u390 067E  
+                    u631 0860                      u551 07B6                      u471 071E  
+                    u391 067A                      u640 0876                      u560 07CE  
+                    u480 0736                      u641 0872                      u561 07CA  
+                    u481 0732                      u650 0884                      u570 07E8  
+                    u490 0748                      u651 0880                      u571 07E4  
+                    u491 0744                      u580 07FA                      u581 07F6  
+                    u590 0818                      u591 0814                     _main 0602  
+                   start 0000             ___param_bank 0000                    ?_main 0001  
+                  _PORTB 0F81                    _PORTD 0F83                    _TRISB 0F93  
+                  _TRISC 0F94                    _TRISD 0F95          __end_of_lcddisp 0910  
+        __end_of_lcdctrl 0948                    _delay 0890                    status 0FD8  
+        __initialization 0948             __end_of_main 0890                   ??_main 000B  
+          __activetblptr 0000                   ?_delay 0001                   _ADCON1 0FC1  
+                 delay@i 0006                   isa$std 0001                ??_lcddisp 000A  
+              ??_lcdctrl 000A             __mediumconst 0000               __accesstop 0060  
+__end_of__initialization 0948            ___rparam_used 0001           __pcstackCOMRAM 0001  
+          __end_of_delay 08D8                  ??_delay 0005                  __Hparam 0000  
+                __Lparam 0000             __psmallconst 0600                  __pcinit 0948  
+                __ramtop 0600                  __ptext0 0602                  __ptext1 08D8  
+                __ptext2 0910                  __ptext3 0890                  _lcddisp 08D8  
+                _lcdctrl 0910     end_of_initialization 0948      start_initialization 0948  
+               ?_lcddisp 0001                 ?_lcdctrl 0001              __smallconst 0600  
+              delay@time 0001                main@count 000B                 __Hrparam 0000  
+               __Lrparam 0000                 isa$xinst 0000                 lcddisp@b 000A  
+               lcdctrl@a 000A  
